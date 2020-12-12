@@ -1,0 +1,352 @@
+{
+	"info": {
+		"_postman_id": "155ff5a0-4663-47ad-84a6-21c9545c254d",
+		"name": "Banco Inter Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UserController",
+			"item": [
+				{
+					"name": "/users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "58bb3b03-72ca-4cad-a06d-de1e6e5c1203",
+								"exec": [
+									"tests['Validate response 201'] = responseCode.code === 201\r",
+									"const response = JSON.parse(responseBody)\r",
+									"tests['Validate response body name'] = response.name === 'maria'\r",
+									"tests['Validate response body email'] = response.email === 'jasd@ads.com'\r",
+									"\r",
+									"postman.setEnvironmentVariable(\"userId\", response.id)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"maria\",\r\n    \"email\": \"jasd@ads.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/{userId}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "93369be3-5f17-49fb-926d-8a3ea89057c2",
+								"exec": [
+									"tests['Validate response 200'] = responseCode.code === 200\r",
+									"const response = JSON.parse(responseBody)\r",
+									"tests['Validate response body name'] = response.name === 'Mathues'\r",
+									"tests['Validate response body email'] = response.email === 'jasd@ads.com'\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Mathues\",\r\n    \"email\": \"jasd@ads.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/{{userId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/{userId}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "57c64bc0-cc25-495c-a4d3-4e70515247cb",
+								"exec": [
+									"tests['Validate response 200'] = responseCode.code === 200\r",
+									"const response = JSON.parse(responseBody)\r",
+									"tests['Validate response body name'] = response.name === 'Mathues'\r",
+									"tests['Validate response body email'] = response.email === 'jasd@ads.com'\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/{{userId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/{userId}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4d8d40c5-da8a-4b77-917a-9da93cf68b45",
+								"exec": [
+									"tests['Validate response 204'] = responseCode.code === 204"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/{{userId}}a",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{userId}}a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e54f42f6-c718-43ee-b934-945591de7845",
+								"exec": [
+									"tests['Validate response 200'] = responseCode.code === 200\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "CalculationController",
+			"item": [
+				{
+					"name": "/calculations/{input}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ae351589-7d6a-469d-b011-40adb6acf610",
+								"exec": [
+									"tests['Validate response 200'] = responseCode.code === 200\r",
+									"const response = JSON.parse(responseBody)\r",
+									"tests['Validate response body'] = response === 2"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/calculations/98123123",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"calculations",
+								"98123123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/calculations/{input}/frequency/{frequency}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d63e8341-b09d-42c1-91b3-d1f94f641b65",
+								"exec": [
+									"tests['Validate response 200'] = responseCode.code === 200\r",
+									"const response = JSON.parse(responseBody)\r",
+									"tests['Validate response body'] = response === 6"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/calculations/9813123123",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"calculations",
+								"9813123123"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "UserCalculationController",
+			"item": [
+				{
+					"name": "/users/{userId}/calculations/{input}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "42645a3d-3305-42d7-af12-aec17abfb3c3",
+								"exec": [
+									"tests['Validate response 200'] = responseCode.code === 200\r",
+									"const response = JSON.parse(responseBody)\r",
+									"tests['Validate response body name'] = response.name === 'Mathues'\r",
+									"tests['Validate response body email'] = response.email === 'jasd@ads.com'\r",
+									"tests['Validate response body calculations input'] = response.calculations[0].input === 9875\r",
+									"tests['Validate response body calculations result'] = response.calculations[0].result === 2"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/{{userId}}/calculations/9875",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{userId}}",
+								"calculations",
+								"9875"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/{userId}/calculations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3e4c2ee3-dc80-493e-ae91-18a3dbcbf168",
+								"exec": [
+									"tests['Validate response 200'] = responseCode.code === 200\r",
+									"const response = JSON.parse(responseBody)\r",
+									"tests['Validate response body calculations input'] = response[0].input === 9875\r",
+									"tests['Validate response body calculations result'] = response[0].result === 2"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/{{userId}}/calculations",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"{{userId}}",
+								"calculations"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
