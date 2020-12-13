@@ -14,7 +14,7 @@ public final class TestsUtil {
     }
 
     public static Optional<User> buildUser(final Calculation calculation) {
-        final User silas = new User("Silas", "asd@asd.com");
+        final User silas = new User("Silas".getBytes(), "asd@asd.com".getBytes());
         silas.addCalculationsOnUser(calculation);
         return Optional.of(silas);
     }

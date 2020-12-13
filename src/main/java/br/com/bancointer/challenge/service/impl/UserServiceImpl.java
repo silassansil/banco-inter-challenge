@@ -19,13 +19,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveOrUpdate(final User user) {
+        this.findById(user.getId()).ifPresent(user::updateData);
         return this.userRepository.save(user);
     }
 
     @Override
     public void delete(final String userId) {
-        this.findById(userId)
-                .ifPresent(this.userRepository::delete);
+        this.findById(userId).ifPresent(this.userRepository::delete);
     }
 
     @Override

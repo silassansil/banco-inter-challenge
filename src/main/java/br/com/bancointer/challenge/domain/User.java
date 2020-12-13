@@ -15,23 +15,40 @@ public class User {
 
     @Id
     private String id;
-    private String name;
-    private String email;
+
+    @Lob
+    private byte[] name;
+
+    @Lob
+    private byte[] email;
 
     @JoinColumn
     @OneToMany(cascade = CascadeType.ALL)
-    private final List<Calculation> calculations = new ArrayList<>();
+    private List<Calculation> calculations = new ArrayList<>();
 
-    public User(String name, String email) {
+    @Lob
+    private byte[] privateKey;
+
+    public User(byte[] name, byte[] email) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.email = email;
     }
 
-    public User(String id, String name, String email) {
+    public User(String id, byte[] name, byte[] email) {
         this.id = id;
         this.name = name;
         this.email = email;
+    }
+
+    public User(byte[] name, byte[] email, byte[] privateKey) {
+        this(name, email);
+        this.privateKey = privateKey;
+    }
+
+    public void updateData(final User user) {
+        this.privateKey = user.privateKey;
+        this.calculations = user.calculations;
     }
 
     public void addCalculationsOnUser(final Calculation calculation) {

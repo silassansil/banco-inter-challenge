@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "155ff5a0-4663-47ad-84a6-21c9545c254d",
+		"_postman_id": "843893a6-6a18-4740-9ee7-5360ff443dd7",
 		"name": "Banco Inter Challenge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,14 +14,16 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "58bb3b03-72ca-4cad-a06d-de1e6e5c1203",
+								"id": "3d6b391c-93b0-4078-8d1e-4fff05eb2f71",
 								"exec": [
 									"tests['Validate response 201'] = responseCode.code === 201\r",
 									"const response = JSON.parse(responseBody)\r",
+									"\r",
 									"tests['Validate response body name'] = response.name === 'maria'\r",
 									"tests['Validate response body email'] = response.email === 'jasd@ads.com'\r",
 									"\r",
-									"postman.setEnvironmentVariable(\"userId\", response.id)"
+									"postman.setEnvironmentVariable(\"userId\", response.id)\r",
+									"postman.setEnvironmentVariable(\"publicKey\", pm.response.headers.get('x-challenge-public-key'))"
 								],
 								"type": "text/javascript"
 							}
@@ -58,7 +60,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "93369be3-5f17-49fb-926d-8a3ea89057c2",
+								"id": "740ae236-3409-4bdb-9759-c5ec9573bcda",
 								"exec": [
 									"tests['Validate response 200'] = responseCode.code === 200\r",
 									"const response = JSON.parse(responseBody)\r",
@@ -72,7 +74,13 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "x-challenge-public-key",
+								"value": "{{publicKey}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"name\": \"Mathues\",\r\n    \"email\": \"jasd@ads.com\"\r\n}",
@@ -102,7 +110,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "57c64bc0-cc25-495c-a4d3-4e70515247cb",
+								"id": "098c96b3-9681-423e-b362-e9556298d3fc",
 								"exec": [
 									"tests['Validate response 200'] = responseCode.code === 200\r",
 									"const response = JSON.parse(responseBody)\r",
@@ -137,7 +145,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "4d8d40c5-da8a-4b77-917a-9da93cf68b45",
+								"id": "f25975d8-bb5c-4f8d-a9b3-c41aa3cb009b",
 								"exec": [
 									"tests['Validate response 204'] = responseCode.code === 204"
 								],
@@ -168,10 +176,11 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e54f42f6-c718-43ee-b934-945591de7845",
+								"id": "7072c88c-4152-44ae-9151-5948da8a01a5",
 								"exec": [
 									"tests['Validate response 200'] = responseCode.code === 200\r",
-									""
+									"const response = JSON.parse(responseBody)\r",
+									"postman.setEnvironmentVariable(\"userId\", response[0] ? response[0].id : null)"
 								],
 								"type": "text/javascript"
 							}
@@ -205,7 +214,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "ae351589-7d6a-469d-b011-40adb6acf610",
+								"id": "36a65f62-172f-46ec-8363-b5341cb3af7c",
 								"exec": [
 									"tests['Validate response 200'] = responseCode.code === 200\r",
 									"const response = JSON.parse(responseBody)\r",
@@ -238,7 +247,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "d63e8341-b09d-42c1-91b3-d1f94f641b65",
+								"id": "89c12096-36be-42b4-84d9-ae938e48d17f",
 								"exec": [
 									"tests['Validate response 200'] = responseCode.code === 200\r",
 									"const response = JSON.parse(responseBody)\r",
@@ -277,7 +286,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "42645a3d-3305-42d7-af12-aec17abfb3c3",
+								"id": "b8654527-4c04-4ed7-8593-0ab606454d3f",
 								"exec": [
 									"tests['Validate response 200'] = responseCode.code === 200\r",
 									"const response = JSON.parse(responseBody)\r",
@@ -315,7 +324,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "3e4c2ee3-dc80-493e-ae91-18a3dbcbf168",
+								"id": "e3ebe642-8496-4133-bfc9-a4c5f799e219",
 								"exec": [
 									"tests['Validate response 200'] = responseCode.code === 200\r",
 									"const response = JSON.parse(responseBody)\r",
