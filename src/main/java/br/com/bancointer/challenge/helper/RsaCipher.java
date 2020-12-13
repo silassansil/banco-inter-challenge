@@ -8,7 +8,7 @@ import java.security.PublicKey;
 
 import static br.com.bancointer.challenge.helper.CipherConstants.ALGORITHM;
 
-public class RsaCipher {
+public final class RsaCipher {
 
     @SneakyThrows
     public static byte[] encrypt(final String value, final PublicKey publicKey) {

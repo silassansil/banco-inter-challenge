@@ -2,6 +2,8 @@ package br.com.bancointer.challenge.controllers;
 
 import br.com.bancointer.challenge.domain.Calculation;
 import br.com.bancointer.challenge.domain.User;
+import br.com.bancointer.challenge.helper.KeyHelper;
+import br.com.bancointer.challenge.helper.RsaCipher;
 import br.com.bancointer.challenge.service.UserCalculationService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,8 +53,8 @@ class UserCalculationControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(bodyExpected.getId()))
-                .andExpect(jsonPath("$.name").value(bodyExpected.getName()))
-                .andExpect(jsonPath("$.email").value(bodyExpected.getEmail()));
+                .andExpect(jsonPath("$.name").value(RsaCipher.decrypt(bodyExpected.getName(), KeyHelper.rebuildPrivateKey(bodyExpected.getPrivateKey()))))
+                .andExpect(jsonPath("$.email").value(RsaCipher.decrypt(bodyExpected.getEmail(), KeyHelper.rebuildPrivateKey(bodyExpected.getPrivateKey()))));
 
         verify(this.userCalculationService).calculateAndUpdateUserData(anyString(), anyString());
     }
