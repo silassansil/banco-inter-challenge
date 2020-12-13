@@ -4,6 +4,7 @@ import br.com.bancointer.challenge.domain.User;
 import br.com.bancointer.challenge.helper.KeyHelper;
 import br.com.bancointer.challenge.helper.RsaCipher;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -18,14 +19,18 @@ import java.util.stream.Collectors;
 @Setter
 public class UserDTO {
 
+    @ApiModelProperty(value = "User Id")
     private String id;
 
     @NotBlank
+    @ApiModelProperty(value = "User Name")
     private String name;
 
     @NotBlank
+    @ApiModelProperty(value = "User Email")
     private String email;
 
+    @ApiModelProperty(value = "User List of Calculation")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<CalculationDTO> calculations;
 
