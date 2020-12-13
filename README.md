@@ -22,3 +22,9 @@ To run all Tests you can use Maven, like this:
 ```shell
 mvn tests
 ```
+
+## Documentation
+
+You can see our documentation in:
+
+- [Swagger](http://localhost:8080/swagger-ui.html)
